@@ -1,10 +1,10 @@
 import tkinter as tk
-from tkinter import ttk
-import re
 from PIL import Image, ImageTk
-from colored_star_fractal import colored_star_fractal
+#from colored_star_fractal import colored_star_fractal as CircleFrat
 
-IMAGE_PATH = ''
+IMAGE_PATH = 'C:\\Users\\tawad\\Git\\Fucked-Fractals\\img\\Backgroundimg.jfif'
+WIDTH, HEIGTH = 200, 200
+root = tk.Tk()
 
 class SampleApp(tk.Tk):
     def __init__(self):
@@ -40,13 +40,18 @@ class SampleApp(tk.Tk):
 class StartUpPage(tk.Canvas):
     def __init__(self, master, *args, **kwargs):
         tk.Canvas.__init__(self, master, *args, **kwargs,)
-        tk.Frame(self,) # Here the parent of the frame is the self instance of type tk.Canvas
+        tk.Frame(self,bg='blue', width=430) # Here the parent of the frame is the self instance of type tk.Canvas
         tk.Label(self, text="Example").grid(column = 0, row = 0)
-        self.canvas = tk.Canvas(self,)
+        #img = ImageTk.PhotoImage(Image.open(IMAGE_PATH).resize((WIDTH, HEIGTH), Image.LANCZOS))
+        #self.canvas.background = img  # Keep a reference in case this code is put in a function.
+        #bg = self.canvas.create_image(0, 0, anchor=tk.NW, image=img)
+        self.canvas = tk.Canvas(self,bg='blue', width=430)
+        print('got',self,master,args,kwargs)
         tk.Button(self, text="Canvas1",
               command=lambda: master.switch_Canvas(PageOne)).grid(column = 0, row = 1)
         tk.Button(self, text="Canvas2",
               command=lambda: master.switch_Canvas(PageTwo)).grid(column = 0, row = 2)
+        
 
 
 class PageOne(tk.Frame):
