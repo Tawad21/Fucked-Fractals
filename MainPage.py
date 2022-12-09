@@ -2,6 +2,9 @@ import tkinter as tk
 from tkinter import ttk
 import re
 from PIL import Image, ImageTk
+from colored_star_fractal import colored_star_fractal
+
+IMAGE_PATH = ''
 
 class SampleApp(tk.Tk):
     def __init__(self):
@@ -36,10 +39,10 @@ class SampleApp(tk.Tk):
 
 class StartUpPage(tk.Canvas):
     def __init__(self, master, *args, **kwargs):
-        tk.Canvas.__init__(self, master, *args, **kwargs)
-        tk.Frame(self) # Here the parent of the frame is the self instance of type tk.Canvas
+        tk.Canvas.__init__(self, master, *args, **kwargs,)
+        tk.Frame(self,) # Here the parent of the frame is the self instance of type tk.Canvas
         tk.Label(self, text="Example").grid(column = 0, row = 0)
-        self.canvas = tk.Canvas(self, )
+        self.canvas = tk.Canvas(self,)
         tk.Button(self, text="Canvas1",
               command=lambda: master.switch_Canvas(PageOne)).grid(column = 0, row = 1)
         tk.Button(self, text="Canvas2",
