@@ -1,12 +1,14 @@
 import tkinter as tk
+from tkinter import *
 from PIL import Image, ImageTk
 #from colored_star_fractal import colored_star_fractal as CircleFrat
 
-IMAGE_PATH = 'C:\\Users\\tawad\\Git\\Fucked-Fractals\\img\\Backgroundimg.jfif'
 WIDTH, HEIGTH = 200, 200
-root = tk.Tk()
+window = tk.Tk()
+window.geometry("500x500")
+IMG = tk.PhotoImage(file = "C:\\Users\\tawad\\Git\\Fucked-Fractals\\img\\Backgroundimg.png")
 
-class SampleApp(tk.Tk):
+class App(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
         self._mainCanvas= None
@@ -42,15 +44,13 @@ class StartUpPage(tk.Canvas):
         tk.Canvas.__init__(self, master, *args, **kwargs,)
         tk.Frame(self,bg='blue', width=430) # Here the parent of the frame is the self instance of type tk.Canvas
         tk.Label(self, text="Example").grid(column = 0, row = 0)
-        #img = ImageTk.PhotoImage(Image.open(IMAGE_PATH).resize((WIDTH, HEIGTH), Image.LANCZOS))
-        #self.canvas.background = img  # Keep a reference in case this code is put in a function.
-        #bg = self.canvas.create_image(0, 0, anchor=tk.NW, image=img)
-        self.canvas = tk.Canvas(self,bg='blue', width=430)
+        #self.background = img  # Keep a reference in case this code is put in a function.
+        #bg = self.create_image(0, 0, anchor=tk.NW, image=img)
+        
         print('got',self,master,args,kwargs)
-        tk.Button(self, text="Canvas1",
-              command=lambda: master.switch_Canvas(PageOne)).grid(column = 0, row = 1)
-        tk.Button(self, text="Canvas2",
-              command=lambda: master.switch_Canvas(PageTwo)).grid(column = 0, row = 2)
+        tk.Button(self, text="Canvas1", command=lambda: master.switch_Canvas(PageOne)).grid(column = 0, row = 1)
+        tk.Button(self, text="Canvas2", command=lambda: master.switch_Canvas(PageTwo)).grid(column = 0, row = 2)
+        
         
 
 
@@ -81,5 +81,5 @@ class PageTwo(tk.Frame): # Sub-lcassing tk.Frame
         #print('is instance',isinstance(self,tk.Frame))
 
 if __name__ == "__main__":
-    app = SampleApp()
+    app = App()
     app.mainloop()
