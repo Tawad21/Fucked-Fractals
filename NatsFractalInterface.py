@@ -5,9 +5,6 @@ class Main:
     def __init__(self):
         root = tk.Tk()
         root.title('Star Fractals')
-        
-        self.canvas = tk.Canvas(root, width=900, height=900, bg='black')
-        self.canvas.pack()
 
         # Add a label, an entry, and a button to frame1
         frame1 = tk.Frame(root) # Create and add a frame to window
@@ -20,6 +17,9 @@ class Main:
             justify = tk.RIGHT).pack(side = tk.LEFT)
         tk.Button(frame1, text = "Display Recursive Star", 
             command = self.display).pack(side = tk.LEFT)
+
+        self.canvas = tk.Canvas(root, width=900, height=900, bg='black')
+        self.canvas.pack()
 
         root.mainloop() # Create an event loop
         

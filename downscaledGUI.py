@@ -35,13 +35,13 @@ frame1.pack(pady = 20)
 
 # Add buttons
 button1 = Button(frame1,text="Page One")
-button1.pack(pady=20)
+button1.pack(pady=0)
   
 button2 = Button( frame1, text = "Page Two")
-button2.pack(pady = 20)
+button2.pack(pady = 0)
 
 button3 = Button( frame1, text = "Exit", command= lambda: root.quit())
-button3.pack(pady = 20)
+button3.pack(pady = 0)
   
 # Execute tkinter
 
