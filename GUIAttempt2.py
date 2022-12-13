@@ -28,11 +28,14 @@ sb = tk.PhotoImage(file ="C:\\Users\\tawad\\Git\\Fucked-Fractals\\img\\sidebar.p
 
 
 #region functions
+
+# Frame for side bar
 options_frame = tk.Frame(root, bg='#101B29',highlightbackground='black',highlightthickness='2')
 
 side_img = tk.Label(options_frame, image=sb)
 side_img.pack()
 
+# 
 def hide_indicators():
     home_indicate.config(bg='#101B29')
     page1_indicate.config(bg='#101B29')
@@ -82,19 +85,19 @@ home_indicate = tk.Label(options_frame, text='', bg='#101B29')
 home_indicate.place(x=3, y=50, width=5, height=40)
 
 page1_btn = tk.Button(options_frame, text='Page 1', font=('Bold',15),
-                    fg='white',bd=0,bg='#101B29',command=lambda: indicate(page1_indicate, page1_page()))
+                    fg='white',bd=0,bg='#101B29',command=lambda: indicate(page1_indicate, page1_page(), NatsFractalInterface.Main()))
 page1_btn.place(x=60, y=100)
 page1_indicate = tk.Label(options_frame, text='', bg='#101B29')
 page1_indicate.place(x=3, y=100, width=5, height=40)
 
 page2_btn = tk.Button(options_frame, text='Page 2', font=('Bold',15), 
-                    fg='white',bd=0,bg='#101B29',command=lambda: indicate(page2_indicate, page2_page))
+                    fg='white',bd=0,bg='#101B29',command=lambda: indicate(page2_indicate, page2_page()))
 page2_btn.place(x=60, y=150)
 page2_indicate = tk.Label(options_frame, text='', bg='#101B29')
 page2_indicate.place(x=3, y=150, width=5, height=40)
 
 page3_btn = tk.Button(options_frame, text='Page 3', font=('Bold',15), 
-                    fg='white',bd=0,bg='#101B29',command=lambda: indicate(page3_indicate, page3_page))
+                    fg='white',bd=0,bg='#101B29',command=lambda: indicate(page3_indicate, page3_page()))
 page3_btn.place(x=60, y=200)
 page3_indicate = tk.Label(options_frame, text='', bg='#101B29')
 page3_indicate.place(x=3, y=200, width=5, height=40)
