@@ -1,3 +1,5 @@
+#author:@nat
+
 import tkinter as tk
 import math
 
