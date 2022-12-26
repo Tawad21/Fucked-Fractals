@@ -1,5 +1,5 @@
 import tkinter as tk
-import NatsFractalInterface
+import NatsFractalInterface 
 
 root = tk.Tk()
 
@@ -21,8 +21,8 @@ root.geometry(f'{window_width}x{window_height}+{center_x}+{center_y}')
 root.title('consellsation')
 
 # Add image file
-bg = tk.PhotoImage(file = "C:\\Users\\tawad\\Git\\Fucked-Fractals\\img\\Backgroundimg.png")
-sb = tk.PhotoImage(file ="C:\\Users\\tawad\\Git\\Fucked-Fractals\\img\\sidebar.png")
+bg = tk.PhotoImage(file = "/Users/vladimirpetkov/Documents/GitHub/Fucked-Fractals/img/Backgroundimg.png")
+sb = tk.PhotoImage(file ="/Users/vladimirpetkov/Documents/GitHub/Fucked-Fractals/img/sidebar.png")
 #endregion
 
 
@@ -51,8 +51,10 @@ def home_page():
     home_frame = tk.Frame(main_frame)
     label1 = tk.Label( home_frame, image = bg)
     #label1.place(x = 0, y = 0)
+    #pic1 = tk.PhotoImage(home_frame, file = "/Users/vladimirpetkov/Desktop/school/project fractals/con.png")
     label1.pack()
     home_frame.pack()
+    #pic1.pack()
 
 def page1_page():
     page1_frame = tk.Frame(main_frame)
@@ -60,6 +62,7 @@ def page1_page():
     #label1.place(x = 0, y = 0)
     label1.pack()
     page1_frame.pack()
+    NatsFractalInterface.Main()
 
 def page2_page():
     page2_frame = tk.Frame(main_frame)
@@ -85,7 +88,7 @@ home_indicate = tk.Label(options_frame, text='', bg='#101B29')
 home_indicate.place(x=3, y=50, width=5, height=40)
 
 page1_btn = tk.Button(options_frame, text='Page 1', font=('Bold',15),
-                    fg='white',bd=0,bg='#101B29',command=lambda: indicate(page1_indicate, page1_page(), NatsFractalInterface.Main()))
+                    fg='white',bd=0,bg='#101B29',command=lambda: indicate(page1_indicate, page1_page()))
 page1_btn.place(x=60, y=100)
 page1_indicate = tk.Label(options_frame, text='', bg='#101B29')
 page1_indicate.place(x=3, y=100, width=5, height=40)
