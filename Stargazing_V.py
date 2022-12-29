@@ -11,7 +11,7 @@ class ProgramEngine(Tk):
         self.title("Stargazing")
         self._mainCanvas= None
         self._allCanvases = dict()
-        self.switch_Canvas(MainPage) #the program starts with the Main Canvas
+        self.switch_Canvas(BeginningPage) #the program starts with the Main Canvas
 
     #Creating a function, that helps switching Canvases
     def switch_Canvas(self, Canvas_class):
@@ -27,6 +27,38 @@ class ProgramEngine(Tk):
 
         canvas.pack(fill="both", expand=True)
         self._mainCanvas = canvas
+
+#Creating the Beginning Page
+class BeginningPage(Canvas):
+    def __init__(self, master, *args, **kwargs):
+        
+        #Initialising the canvaas
+        Canvas.__init__(self, master, *args, **kwargs)
+        self.canvas = Canvas(self, bg = 'black')
+        self.canvas.pack(fill="both", expand=True)
+
+        #Message and Button
+        self.info_for_the_user = Message(self.canvas, width = 300, bg = "black", font= ("Arial", 17), justify = "center", fg="white", text="An old prophecy goes:\n \"...In the Beginning, There Was Nothing. \n The Lord Said, ‘Let There Be Light.’ \n Then There Was Still Nothing, \n But when the User preessed the button, light appeared and our universe began...\"")
+        self.info_for_the_user.place( x = 820, y = 100)
+
+        Button(self.canvas, text="Light",
+            command=lambda: master.switch_Canvas(VideoPage)).place(x = 560, y = 400)
+
+#Creating the Video Page
+class VideoPage(Canvas):
+    def __init__(self, master, *args, **kwargs):
+        
+        #Initialising the canvaas
+        Canvas.__init__(self, master, *args, **kwargs)
+        self.canvas = Canvas(self, bg = 'white')
+        self.canvas.pack(fill="both", expand=True)
+
+        #Message and Button
+        self.info_for_the_user = Message(self.canvas, width = 271, bg = "black", font= ("Arial", 15), justify = "center", fg="white", text="Lord hasn't come here yet...")
+        self.info_for_the_user.place( x = 860, y = 100)
+
+        Button(self.canvas, text="Next",
+            command=lambda: master.switch_Canvas(MainPage)).place(x = 560, y = 400)
 
 #Creating the Main Page
 class MainPage(Canvas):
@@ -124,7 +156,7 @@ class FractalPage1(Canvas):
         
         #Initialising the canvaas
         Canvas.__init__(self, master, *args, **kwargs)
-        self.canvas = Canvas(self, width=900, height=900)
+        self.canvas = Canvas(self)
         self.canvas.pack(fill="both", expand=True)
 
         #Background Photo
@@ -205,7 +237,7 @@ class FractalPage2(Canvas):
         
         #Initialising the canvaas
         Canvas.__init__(self, master, *args, **kwargs)
-        self.canvas = Canvas(self, width=900, height=900)
+        self.canvas = Canvas(self)
         self.canvas.pack(fill="both", expand=True)
 
         #Background Photo
