@@ -57,7 +57,7 @@ class Main:
     def star_fractals(self, x, y, r, color1, color2):
         depth = int(self.depth.get())
 
-        if r < 400/(2.62**(depth-1))-1:
+        if r < 400/2.62**(depth)-1:
             return
         
         else:
