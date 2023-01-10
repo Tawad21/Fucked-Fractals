@@ -84,7 +84,7 @@ class Main:
         else:
             self.simple_star(x, y, r, color1, color2)
             
-            return self.star_fractals(x, y, r.self*1/2.62, color2, color1)
+            return self.star_fractals(x, y, r*1/2.62, color2, color1)
 
       
     def zoomin(self):
