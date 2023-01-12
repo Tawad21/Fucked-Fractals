@@ -1,4 +1,5 @@
 from tkinter import *
+from tkvideo import *
 import re
 import math
 
@@ -55,10 +56,20 @@ class VideoPage(Canvas):
 
         #Message and Button
         self.info_for_the_user = Message(self.canvas, width = 271, bg = "black", font= ("Arial", 15), justify = "center", fg="white", text="Lord hasn't come here yet...")
-        self.info_for_the_user.place( x = 860, y = 100)
+        self.info_for_the_user.place(anchor="n",x = 560, y = 10)
 
         Button(self.canvas, text="Next",
-            command=lambda: master.switch_Canvas(MainPage)).place(x = 560, y = 400)
+            command=lambda: master.switch_Canvas(MainPage)).place(anchor="n",x = 860, y = 10)
+
+        lblVideo= Label(self.canvas)
+        lblVideo.place(x=560,y=400)
+
+        player=tkvideo("C:\\Users\\tawad\\Git\\Fucked-Fractals\\y2meta.com - NASA _ The Big Bang.mp4",
+                lblVideo,
+                loop=1,
+                size=(700,500))
+        
+        player.play()
 
 #Creating the Main Page
 class MainPage(Canvas):
@@ -70,25 +81,25 @@ class MainPage(Canvas):
         self.canvas.pack(fill="both", expand=True)
 
         #Here we create the pictures, which will be used in the Main Page
-        self.backgroundimg = PhotoImage(file="/Users/vladimirpetkov/Desktop/school/project fractals/pictures/nightsky.png") #the code is made from Macbook, so the path for Windows users will be different
+        self.backgroundimg = PhotoImage(file="C:\\Users\\tawad\\Git\\Fucked-Fractals\\img\\nightsky.png") #the code is made from Macbook, so the path for Windows users will be different
         self.canvas.create_image(0,0,image=self.backgroundimg, anchor = "nw")
         #Canis Major Constellation
-        self.imgcon = PhotoImage(file="/Users/vladimirpetkov/Desktop/school/project fractals/pictures/canis major.png") 
+        self.imgcon = PhotoImage(file="C:\\Users\\tawad\\Git\\Fucked-Fractals\\img\\canis major.png") 
         self.canvas.create_image(30,0,image=self.imgcon, anchor = "nw")
         Label(self.canvas, 
             text = "Canis Major", bg = "black", fg="white").place(x = 26, y = 39)
         #Ursa Major Constellation
-        self.imgcon1 = PhotoImage(file="/Users/vladimirpetkov/Desktop/school/project fractals/pictures/ursa major.png") 
+        self.imgcon1 = PhotoImage(file="C:\\Users\\tawad\\Git\\Fucked-Fractals\\img\\ursa major.png") 
         self.canvas.create_image(10,370,image=self.imgcon1, anchor = "nw")
         Label(self.canvas, 
             text = "Ursa Major", bg = "black", fg="white").place(x = 405, y = 690)
         #Pisces Constellation
-        self.imgcon2 = PhotoImage(file="/Users/vladimirpetkov/Desktop/school/project fractals/pictures/pisces.png") 
+        self.imgcon2 = PhotoImage(file="C:\\Users\\tawad\\Git\\Fucked-Fractals\\img\\pisces.png") 
         self.canvas.create_image(370,40,image=self.imgcon2, anchor = "nw")
         Label(self.canvas, 
             text = "Pisces", bg = "black", fg="white").place(x = 635, y = 70)
         #Orion Constellation
-        self.imgcon3 = PhotoImage(file="/Users/vladimirpetkov/Desktop/school/project fractals/pictures/orion.png")
+        self.imgcon3 = PhotoImage(file="C:\\Users\\tawad\\Git\\Fucked-Fractals\\img\\orion.png")
         self.canvas.create_image(480,280,image=self.imgcon3, anchor = "nw")
         Label(self.canvas, 
             text = "Orion", bg = "black", fg="white").place(x = 715, y = 450)
@@ -158,19 +169,27 @@ class FractalPage1(Canvas):
         Canvas.__init__(self, master, *args, **kwargs)
         self.canvas = Canvas(self)
         self.canvas.pack(fill="both", expand=True)
-
+        self.r = 400 # added variable to keep track of the current radius
         #Background Photo
-        self.bgimg = PhotoImage(file="/Users/vladimirpetkov/Desktop/school/project fractals/pictures/nightsky.png")
+        self.bgimg = PhotoImage(file="C:\\Users\\tawad\\Git\\Fucked-Fractals\\img\\nightsky.png")
         self.canvas.create_image(0,0,image=self.bgimg, anchor = "nw")
 
         #Label, Entry, Buttons
         Label(self.canvas, 
             text = "Depth of the star: ", bg = "black", fg="white").place(anchor = "n", x = 420, y = 13)
+        
         self.depth = StringVar(self.canvas)
 
         #The entry is used so the user can input the number of iterations, that they want to see.
         Entry(self.canvas, textvariable = self.depth, 
             justify = RIGHT).place(anchor = "n", x = 600, y = 10)
+
+        Label(self.canvas, text = "Enter the color of star: ", bg="black", fg="white").place(anchor = "n", x = 100, y = 13)
+        
+        self.color = StringVar()
+
+        Entry(self.canvas, textvariable = self.color, 
+            justify = RIGHT).place(anchor= "n", x= 210, y=10)
 
         Button(self.canvas, text = "Display Recursive Star", 
             command = self.display).place(anchor = "n", x = 790, y = 10)
@@ -178,8 +197,12 @@ class FractalPage1(Canvas):
         Button(self.canvas, text="Main page",
             command=lambda: master.switch_Canvas(MainPage)).place(anchor = "se", x = 1087, y = 770)
         
+        zoom_in_button = Button(self.canvas, text="Zoom in", command=self.zoomin, padx=10,pady=10)
+        zoom_in_button.place(anchor = "n", x = 960, y = 10)
+        zoom_out_button = Button(self.canvas, text="Zoom out", command=self.zoomout, padx=10,pady=10)
+        zoom_out_button.place(anchor = "n", x = 1100, y = 10)
         #Learning Information
-        self.learninginfo = Message(self.canvas, width = 250, bg = "#34495E", fg="white", justify = "center", pady = "15", padx = "10", font= ("Arial", 15),
+        self.learninginfo = Message(self.canvas, width = 250, bg = "#34495E", fg="white", justify = "center", pady = "15", padx = "10", font= ("Arial", 10),
             text  = "Why are stars drawn with 5 points? \n Have you ever wondered why are stars drawn with five points, while in reality they look barely anything alike? \n Well, this has something to do with light behaviour. Light establishes itself as both a wave and a particle. Sometimes, it behaves like a particle (known as a photon) and is thus able to travel in straight paths, but at other times, it travels like a wave. Although it doesn’t make much sense to us intuitively, there is conclusive evidence for light’s duality, named by scientists as the “wave-particle duality of light”. Thanks to these wave-like characteristics, when light emitted from a distant object reaches another object or opening, its waves are bounced or bent slightly around the object and interfere with each other to produce various patterns on whatever they ultimately fall on. This is the reason why any light source appears to sparkle with pointed corners when you squint your eyes.")
         self.learninginfo.place(anchor= "e", x = 1170, y = 400)
 
@@ -205,31 +228,43 @@ class FractalPage1(Canvas):
         e = [x+int(r*math.sin(math.pi/5)), y+int(r*math.cos(math.pi/5))]
         points = [a, b, c, d, e, a]
         
-        self.canvas.create_oval(x-r, y-r, x+r, y+r, width=2, outline='#FAFAD2', fill = "black")
-        self.canvas.create_polygon(points, width=2, outline='#FFE4B5', fill=color1)  
+        self.canvas.create_oval(x-r, y-r, x+r, y+r, width=2, outline='cyan2', fill='black')
+        self.canvas.create_polygon(points, width=2, outline='green2', fill=color1)  
     
         new_points = []
         for i in points:
             new_point = self.rotate([x, y], i, math.pi/5)
             new_points.append(new_point)
-        self.canvas.create_polygon(new_points, width=2, outline='#FAFAD2', fill=color2)  
+        self.canvas.create_polygon(new_points, width=2, outline='yellow', fill=color2) 
     
     #Creating the fractal (repeting the patern)
     def star_fractals(self, x, y, r, color1, color2):
         depth = int(self.depth.get())
-        if depth > 8:
-            pass
-
+        if depth>8: 
+            pass 
+        if r<400/(2.62**(depth-1)):
+            return
         if r < 400/(2.62**(depth-1))-1:
             return
-        
         else:
             self.simple_star(x, y, r, color1, color2)
             return self.star_fractals(x, y, r*1/2.62, color2, color1)
     
+    def zoomin(self):
+            self.r *= 2
+            
+            self.display()
+
+    def zoomout (self):
+            self.r/=2
+            
+            self.display()
+
     #Displaying the created fractal        
     def display(self):
-        self.star_fractals(450, 450, 400, '#4682B4', '#FF4500')
+        self.canvas.delete("all")
+        self.star_fractals(450, 450, self.r, "white",self.color.get())
+
 
 #Creating the Second Fractal Page
 class FractalPage2(Canvas):
@@ -241,7 +276,7 @@ class FractalPage2(Canvas):
         self.canvas.pack(fill="both", expand=True)
 
         #Background Photo
-        self.bgimg = PhotoImage(file="/Users/vladimirpetkov/Desktop/school/project fractals/pictures/nightsky.png")
+        self.bgimg = PhotoImage(file="C:\\Users\\tawad\\Git\\Fucked-Fractals\\img\\nightsky.png")
         self.canvas.create_image(0,0,image=self.bgimg, anchor = "nw")
 
         Button(self.canvas, text="Main page",
