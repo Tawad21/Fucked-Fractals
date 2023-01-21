@@ -4,6 +4,7 @@ from tkvideo import tkvideo
 w= Tk()
 w.title("Tawad's angels video player")
 
+lbltest = Label(w,text="Hello there",bg="black",fg="white").place(x=560,y=400)
 lblVideo= Label(w)
 lblVideo.pack()
 
