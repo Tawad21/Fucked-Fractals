@@ -11,23 +11,18 @@ class ProgramEngine(Tk):
         self.geometry("1200x1080")
         self.title("Stargazing")
         self._mainCanvas= None
-        self._allCanvases = dict()
         self.switch_Canvas(BeginningPage) #the program starts with the Main Canvas
 
     #Creating a function, that helps switching Canvases
     def switch_Canvas(self, Canvas_class):
 
         if self._mainCanvas:
-            self._mainCanvas.pack_forget()
+            self._mainCanvas.pack_forget() #maincanvas is a variable, whose job is to store the currently dispayed canvas/page(class)
 
-        canvas = self._allCanvases.get(Canvas_class, False)
+        canvas = Canvas_class(self) #here we assign the page that we want to be displayed to the variable canvas
 
-        if not canvas:
-            canvas = Canvas_class(self)
-            self._allCanvases[Canvas_class] = canvas
-
-        canvas.pack(fill="both", expand=True)
-        self._mainCanvas = canvas
+        canvas.pack(fill="both", expand=True) #here we display the currently chosen canvas
+        self._mainCanvas = canvas #here we assign the canvas to the maincanvas variable, aka the newly displayed page is being assigned
 
 #Creating the Beginning Page
 class BeginningPage(Canvas):
@@ -163,7 +158,6 @@ class MainPage(Canvas):
         self.info_for_the_user = Message(self.canvas, width = 271, bg = "#34495E", font= ("Arial", 12), justify = "center", fg="white", text="Did you know that in 1922, the International Astronomical Union (IAU) officially recognised 88 constellations, 48 of which were recorded by the Greek astronomer Ptolemy in his book ‘Almagest’ written around 150 AD. \n Many of them have very interesting and ancient stories, mostly derived from myths and legends. \n  \n According to a legend the Pisces constellation is composed of two fish who are connected together by a ribbon. The fish are the goddess Aphrodite and her son Eros (Roman: Venus and Cupid). They turned themselves into fish in order to escape from the monster Typhon. They then connected themselves together with a ribbon in order not to be separated. The constellation is located in an area of the sky known as \”the Sea\” or \”the Water\”, which is full of water related constellations. Pisces contains only faint stars, the stars however do seem to form two small circlets connected together by a string. The constellation is southeast of Pegasus, located between Aquarius and Aries, making it also one of the most difficult to see. \n  \n Please, select a constellation by clicking on it to learn more information.")
         self.info_for_the_user.place( x = 890, y = 70)
 
-
 #Creating the First Fractal Page
 class FractalPage1(Canvas):
     def __init__(self, master, *args, **kwargs):
@@ -275,8 +269,8 @@ class FractalPage1(Canvas):
         self.canvas.create_image(0,0,image=self.backgroundimg, anchor = "nw")
         self.star_fractals(450, 450, self.r, "",self.color.get())
 
-# Micha's Fracatal
-#Creating the Second Fractal Page
+
+#Creating the Second Fractal Page (Michas fractal), which is left unused
 """
 class FractalPage2(Canvas):
     def __init__(self, master, *args, **kwargs):
@@ -293,7 +287,6 @@ class FractalPage2(Canvas):
         Button(self.canvas, text="Main page",
             command=lambda: master.switch_Canvas(MainPage)).place(anchor = "se", x = 1087, y = 770)
     
-
         
         Label(self.canvas, text = "Depth of the star: ", bg = "black", fg="white").place(anchor = "n", x = 420, y = 13)
         
@@ -314,6 +307,8 @@ class FractalPage2(Canvas):
         Entry(self.canvas, textvariable = self.input_x, 
             justify = RIGHT).place(anchor = "n", x = 890, y = 10)
 
+    
+    #Michas fractal
     input_iterations = 20
     input_x = int(input("input position on x axis: ")) * 10
     input_y = int(input("input position on y axis: ")) * 10
